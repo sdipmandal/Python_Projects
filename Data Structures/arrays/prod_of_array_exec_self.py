@@ -16,9 +16,14 @@ Example 2:
 Input: nums = [-1,1,0,-3,3]
 Output: [0,0,9,0,0]
 '''
+from functools import reduce
+
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         op = []
-        for num in nums:
-            pass
+        for i in range(len(nums)):
+            mul = reduce((lambda x, y: x * y), [x for x in nums if x != nums[i]])
+            op.append(mul)   
+
+        return op    
             
