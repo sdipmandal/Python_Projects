@@ -15,15 +15,20 @@ Example 2:
 
 Input: nums = [-1,1,0,-3,3]
 Output: [0,0,9,0,0]
+
+https://leetcode.com/problems/product-of-array-except-self/submissions/
 '''
 from functools import reduce
 
 class Solution:
-    def productExceptSelf(self, nums: List[int]) -> List[int]:
-        op = []
-        for i in range(len(nums)):
-            mul = reduce((lambda x, y: x * y), [x for x in nums if x != nums[i]])
-            op.append(mul)   
+    def productExceptSelf(self, nums):
+        res = [1] * (len(nums))
 
-        return op    
+        for i in range(1, len(nums)):
+            res[i] = res[i-1] * nums[i-1]
+        postfix = 1
+        for i in range(len(nums) - 1, -1, -1):
+            res[i] *= postfix
+            postfix *= nums[i]
+        return res
             
