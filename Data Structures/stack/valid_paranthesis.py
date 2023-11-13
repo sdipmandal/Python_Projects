@@ -21,3 +21,25 @@ Example 3:
 Input: s = "(]"
 Output: false
 '''
+class Solution:
+    def isValid(self, s: str) -> bool:
+        map_data = {'(':')', '{':'}', '[':']'}
+        flag = True
+        if len(s) % 2 != 0:
+            return False
+
+        stack = []
+        for char in s:
+            if char in map_data.keys():
+                stack.append(char)
+            elif stack:
+                last_elem = stack.pop()
+                if map_data[last_elem] != char:
+                    flag = False
+                    break
+            else:
+                flag = False
+        if stack:
+            flag = False
+
+        return flag
