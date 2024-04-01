@@ -29,23 +29,45 @@ class Solution:
         # print(word_string)
         # print(reverse_word)
         # return word_string == reverse_word
-        cursor1, cursor2 = "", ""
-        for i, alph in enumerate(s):
-            if alph.isalnum():
-                cursor1 = alph.lower()
+        # cursor1, cursor2 = "", ""
+        # for i, alph in enumerate(s):
+        #     if alph.isalnum():
+        #         cursor1 = alph.lower()
             
-            if s[len(alph)-i].isalnum():
-                cursor2 = s[len(alph)-i].lower()
+        #     if s[len(alph)-i].isalnum():
+        #         cursor2 = s[len(alph)-i].lower()
 
-            if cursor1 and cursor2:
-                if cursor1 == cursor2:
-                    cursor1, cursor2 = "", ""
-                    continue
-                else:
-                    return False
+        #     if cursor1 and cursor2:
+        #         if cursor1 == cursor2:
+        #             cursor1, cursor2 = "", ""
+        #             continue
+        #         else:
+        #             return False
+        #     else:
+        #         continue
+        l, r = 0, len(s)-1
+        while l < r:
+            if s[l].isalnum():
+                left_str = s[l]
             else:
+                l += 1
                 continue
+            if s[r].isalnum():
+                right_str = s[r]
+            else:
+                r -= 1
+                continue
+            
+            
+            if left_str.lower() == right_str.lower():
+                l += 1
+                r -= 1
+                continue
+            else:
+                return False
+        else:
+            return True
 
 
 sol = Solution()
-print(sol.isPalindrome('A man, a plan, a canal: Panama'))
+print(sol.isPalindrome(' '))
